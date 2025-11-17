@@ -1,67 +1,58 @@
 // Online C compiler to run C program online
 #include <stdio.h>
-#include <string.h>
-
-#define MAX_ITEMS 10
-
-struct MenuItem {
-    int id;
-    char name[30];
-    float price;
-};
-
-struct OrderItem {
-    int id;
-    int quantity;
-};
 
 int main() {
-    struct MenuItem menu[] = {
-        {1, "Pizza", 250.0},
-        {2, "Burger", 150.0},
-        {3, "Pasta", 200.0},
-        {4, "Sandwich", 120.0},
-        {5, "Coffee", 80.0}
-    };
-
-    struct OrderItem order[MAX_ITEMS];
-    int num_items = 0;
+    int item_id, quantity, num_items;
+    float price = 0.0, total = 0.0;
     char customer_name[50];
-    float total = 0.0;
 
     printf("Enter Customer Name: ");
     scanf(" %[^\n]", customer_name);
 
     printf("\n--- MENU ---\n");
-    for (int i = 0; i < 5; i++) {
-        printf("%d. %s - ₹%.2f\n", menu[i].id, menu[i].name, menu[i].price);
-    }
+    printf("1. Pizza - ₹250.00\n");
+    printf("2. Burger - ₹150.00\n");
+    printf("3. Pasta - ₹200.00\n");
+    printf("4. Sandwich - ₹120.00\n");
+    printf("5. Coffee - ₹80.00\n");
 
     printf("\nEnter number of items to order: ");
     scanf("%d", &num_items);
-
-    for (int i = 0; i < num_items; i++) {
-        printf("\nEnter Item ID: ");
-        scanf("%d", &order[i].id);
-        printf("Enter Quantity: ");
-        scanf("%d", &order[i].quantity);
-    }
 
     printf("\n--- BILL ---\n");
     printf("Customer: %s\n", customer_name);
     printf("Items Ordered:\n");
 
     for (int i = 0; i < num_items; i++) {
-        for (int j = 0; j < 5; j++) {
-            if (order[i].id == menu[j].id) {
-                float item_total = menu[j].price * order[i].quantity;
-                printf("%s x %d = ₹%.2f\n", menu[j].name, order[i].quantity, item_total);
-                total += item_total;
-            }
+        printf("\nEnter Item ID: ");
+        scanf("%d", &item_id);
+        printf("Enter Quantity: ");
+        scanf("%d", &quantity);
+
+        if (item_id == 1) {
+            price = 250.0;
+            printf("Pizza * %d = ₹%.2f\n", quantity, price * quantity);
+        } else if (item_id == 2) {
+            price = 150.0;
+            printf("Burger * %d = ₹%.2f\n", quantity, price * quantity);
+        } else if (item_id == 3) {
+            price = 200.0;
+            printf("Pasta * %d = ₹%.2f\n", quantity, price * quantity);
+        } else if (item_id == 4) {
+            price = 120.0;
+            printf("Sandwich * %d = ₹%.2f\n", quantity, price * quantity);
+        } else if (item_id == 5) {
+            price = 80.0;
+            printf("Coffee * %d = ₹%.2f\n", quantity, price * quantity);
+        } else {
+            printf("Invalid Item ID\n");
+            price = 0.0;
         }
+
+        total += price * quantity;
     }
 
-    printf("Total Amount: ₹%.2f\n", total);
+    printf("\nTotal Amount: ₹%.2f\n", total);
     printf("Thank you for dining with us!\n");
 
     return 0;
